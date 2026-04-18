@@ -50,7 +50,6 @@ bot.on('message', (msg) => {
     });
   }
   
-  // 💚 Health Check
   if (text === "/health") {
       exec("ollama ps", (err, stdout) => {
           const ollamaStatus = stdout ? "OK ✅" : "OFF ❌";
@@ -63,12 +62,23 @@ bot.on('callback_query', (query) => {
     const data = query.data;
     if (data === 'run_local') runAgent(query.message.chat.id, "full", "local");
     if (data === 'run_cloud') runAgent(query.message.chat.id, "full", "cloud");
-    if (data === 'health') bot.sendMessage(query.message.chat.id, "/health"); // Trigger text command
+    if (data === 'health') bot.sendMessage(query.message.chat.id, "/health");
     if (data === 'status') exec("ollama ps", (e, s) => bot.sendMessage(query.message.chat.id, `🏭 Models:\n${s}`));
     bot.answerCallbackQuery(query.id);
 });
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
     if (req.url === '/') res.end(fs.readFileSync('../dashboard/index.html'));
     else if (req.url === '/logo.png') res.end(fs.readFileSync('../assets/logo.png'));
-}).listen(PORT, () => console.log(`🌍 OpenClaw v3 live on ${PORT}`));
+});
+
+server.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
+}).on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+        console.log("⚠️ Port 3000 already in use. Try another port.");
+        process.exit(1);
+    } else {
+        console.error(err);
+    }
+});

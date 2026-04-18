@@ -1,0 +1,22 @@
+# Node
+node_modules/
+openclaw/bot/node_modules/
+
+# Logs
+logs/
+openclaw/logs/
+
+# Env
+.env
+openclaw/.env
+
+# Python
+__pycache__/
+*.pyc
+.coverage
+.python-version
+agent/__pycache__/
+openclaw/agent/__pycache__/
+
+# Mac
+.DS_Store
