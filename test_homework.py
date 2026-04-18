@@ -1,26 +1,25 @@
 import pytest
+from homework import add
 
-def add(a, b):
-    if not (isinstance(a, int) or isinstance(a, float)) or not (isinstance(b, int) or isinstance(b, float)):
-        raise TypeError("Both inputs must be either integers or floats.")
-    return a + b
+def test_add_positive_integers():
+    assert add(2, 3) == 5
 
-# Testing Plan:
-def test_add_integers():
-    assert add(3, 5) == 8
+def test_add_negative_integers():
+    assert add(-1, -2) == -3
 
-def test_add_floats():
-    assert add(2.5, 4.75) == 7.25
+def test_add_mixed_integers():
+    assert add(4, -3) == 1
 
-def test_add_mixed_types():
-    assert add(5, 10.5) == 15.5
+def test_add_floating_point_numbers():
+    assert abs(add(0.5, 0.7) - 1.2) < 1e-9
 
-def test_add_non_numeric_int_string():
-    with pytest.raises(TypeError) as excinfo:
-        add('3', 5)
-    assert str(excinfo.value) == "Both inputs must be either integers or floats."
+def test_add_zero_values():
+    assert add(0, 0) == 0
 
-def test_add_non_numeric_float_list():
-    with pytest.raises(TypeError) as excinfo:
-        add(2.5, [4, 7])
-    assert str(excinfo.value) == "Both inputs must be either integers or floats."
+def test_add_large_numbers():
+    large_number = 9999999999999999999999
+    assert add(large_number, large_number) == 2 * large_number
+
+def test_add_non_numeric_inputs():
+    with pytest.raises(TypeError):
+        add('a', 'b')
