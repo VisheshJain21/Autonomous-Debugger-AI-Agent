@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw | Autonomous AI Dashboard</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #00f2ff;
+            --purple: #bc13fe;
+            --text: #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(188, 19, 254, 0.05) 0%, transparent 40%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            padding: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-section img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+        }
+
+        .logo-section h1 {
+            font-size: 24px;
+            margin: 0;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 0, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .status-online::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4ade80;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #log-feed {
+            height: 500px;
+            overflow-y: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #a0a0a0;
+            white-space: pre-wrap;
+            padding-right: 10px;
+        }
+
+        #log-feed::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #log-feed::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        .stat-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card b {
+            display: block;
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .stat-card span {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .glow-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .glow-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .tag {
+            background: var(--border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <img src="/logo.png" alt="OpenClaw Logo">
+                <h1>OPENCLAW</h1>
+            </div>
+            <div class="status-badge status-online">AGENT ACTIVE</div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Real-Time Audit Trail</h2>
+                <div id="log-feed">Loading last autonomous reasoning cycle...</div>
+            </div>
+
+            <div class="stat-group">
+                <div class="card">
+                    <h2>Live Metrics</h2>
+                    <div class="stat-card">
+                        <b id="count-runs">--</b>
+                        <span>Autonomous Cycles</span>
+                    </div>
+                    <div style="margin-top:20px" class="stat-card">
+                        <b id="last-cov">--%</b>
+                        <span>Safety Coverage</span>
+                    </div>
+                    <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" class="glow-btn">Open Telegram Command Center</a>
+                </div>
+
+                <div class="card">
+                    <h2>Active Models</h2>
+                    <div id="model-list" style="font-size: 13px; color: #888;">
+                        Fetching Ollama status...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function updateDashboard() {
+            try {
+                const res = await fetch('/api/stats');
+                const data = await res.json();
+                
+                document.getElementById('log-feed').innerText = data.lastLog || "No logs found yet.";
+                document.getElementById('count-runs').innerText = data.runCount;
+                document.getElementById('last-cov').innerText = data.lastCoverage + "%";
+                document.getElementById('model-list').innerHTML = data.models.split('\n').map(m => `<div><span class="tag">GPU</span> ${m}</div>`).join('');
+            } catch (e) {
+                console.error("Sync failed", e);
+            }
+        }
+
+        setInterval(updateDashboard, 5000);
+        updateDashboard();
+    </script>
+</body>
+</html>
