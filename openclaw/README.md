@@ -1,48 +1,45 @@
-# 🦅 OpenClaw: Enterprise-Grade Autonomous Agent
+# 🤖 OpenClaw: Autonomous AI Coding Engine
 
-> **Hybrid Local/Cloud Reasoning | Self-Healing Codebase | Interactive Dashboards**
+> **Autonomous Debugging | Self-Healing Loops | Test-Driven Evolution**
 
-OpenClaw is a modular autonomous agentic system designed for professional software engineering teams. It automates the entire debugging lifecycle through a multi-agent ReAct architecture, bridging the gap between local privacy and cloud-scale intelligence.
+OpenClaw is a product-grade autonomous agentic workflow designed to identify, patch, and verify Python codebases entirely on local infrastructure.
+
+## 🚀 The Architecture
+
+OpenClaw employs a **4-Stage ReAct Pipeline** powered by localized Ollama models:
+
+1.  **🧠 Planning (Llama 3)**: Analyzes code structure and predicts potential failure points.
+2.  **🔍 Debugging (Qwen 2.5 Coder)**: Generates localized patches and logic corrections.
+3.  **💻 Coding (DeepSeek Coder)**: Rebuilds the codebase with the proposed fixes.
+4.  **🧪 Testing (Qwen 2.5 Coder)**: Writes and executes `pytest` unit tests with strict coverage requirements.
+
+## 🛠️ Key Features
+
+-   **Anti-Cheat Validator**: Integrated regex engine that detects and rejects faked test results.
+-   **Confidence Gate**: Only commits to Git if the test suite passes AND coverage exceeds 80%.
+-   **Intelligent Loop**: Automatically feeds `pytest` failure traces back into the LLM for recursive healing.
+-   **Telegram Interface**: Remote command-and-control with real-time progress updates and log auditing.
+
+## 📦 Getting Started
+
+### 1. Pre-requisites
+- **Ollama**: Running locally with `qwen2.5-coder`, `deepseek-coder`, and `llama3`.
+- **Python 3.11**: Loaded via `pyenv`.
+- **Telegram Bot**: Your own Bot API token.
+
+### 2. Boot the Engine
+```bash
+# Start the Telegram Bot & Remote Server
+node bot.js
+```
+
+### 3. Remote Control
+Message your bot:
+- `/run`: Start the full autonomous fix loop.
+- `/quick`: Execute a fast syntax-only patch.
+- `/status`: Monitor VRAM and active models.
+- `/logs`: Audit the latest AI reasoning trail.
 
 ---
 
-## 🏗️ Architecture Diagram
-```mermaid
-graph TD
-    User([User]) -- Telegram / HTTP --> Bot[Node.js Gateway]
-    Bot -- Task Logic --> Agent[Python ReAct Engine]
-    Agent -- Local Routing --> Ollama[Qwen 2.5 Coder]
-    Agent -- Cloud Routing --> OpenRouter[Claude-3 Haiku]
-    Agent -- Validation --> Pytest[Test Runner]
-    Pytest -- Verification --> Git[Auto-Commit]
-    Bot -- Visibility --> Dashboard[Glassmorphic Web UI]
-    Agent -- Auditing --> Logs[Decision & Trace Logs]
-```
-
-## 📂 Project Structure
-```text
-openclaw/
-├── bot/           # Node.js Telegram & Dashboard Server
-├── agent/         # CrewAI Multi-Agent Workflows
-├── dashboard/     # Vanilla Glassmorphic UI 
-├── logs/          # Persistent Decision & Audit Trails
-├── assets/        # Branding & Logos
-└── .env.example   # Configuration Template
-```
-
-## 🚀 Key Features
-
--   **Gateway Routing**: Intelligent switching between **speed/privacy (Local)** and **complex reasoning (Cloud)**.
--   **Skills System**: Fine-grained commands including `/analyze` (Deep Reviews) and `/explain` (Educational Walkthroughs).
--   **Confidence Gate**: Automated Git commits triggered only upon verified passing test coverage (>80%).
--   **Decision Logging**: Persistent tracking of autonomous choices and reasoning paths.
--   **Glassmorphic UX**: A real-time web dashboard providing a 10,000ft view of your AI development team.
-
-## 🛠️ Quick Start
-
-1. **Configure**: `cp .env.example .env` and add your OpenRouter key.
-2. **Boot**: Run `node bot/bot.js` from the `openclaw` root.
-3. **Control**: Open Telegram or Navigate to `http://localhost:3000`.
-
----
-*Built with ❤️ for the future of Autonomous Debugging.*
+*Built with ❤️ by Antigravity for the next generation of autonomous engineering.*

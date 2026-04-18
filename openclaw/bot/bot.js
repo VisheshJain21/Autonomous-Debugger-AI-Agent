@@ -22,7 +22,8 @@ const runAgent = (chatId, mode = "full", provider = "local") => {
     const pythonPath = "/Users/vishesh_jain/.pyenv/versions/3.11.9/bin/python";
     bot.sendMessage(chatId, `🚀 **OpenClaw ${mode.toUpperCase()}** started...`);
     
-    currentChild = spawn(pythonPath, ["main.py", "--mode", mode, "--provider", provider], { cwd: '../agent' });
+    // 🔥 Updated spawn path to use common parent structure
+    currentChild = spawn(pythonPath, ["../agent/main.py", "--mode", mode, "--provider", provider]);
 
     currentChild.stdout.on('data', (d) => process.stdout.write(d.toString()));
     currentChild.stderr.on('data', (d) => process.stderr.write(`\x1b[91m❌\x1b[0m ${d}`));

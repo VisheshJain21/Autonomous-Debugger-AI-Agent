@@ -1,26 +1,19 @@
 #!/bin/bash
 
-# 🤖 OpenClaw v3: Interactive Boot Sequence
+echo "🦅 OpenClaw v3 Booting..."
+echo "--------------------------------"
 
-echo -e "
-\x1b[94m🦅 OpenClaw v3 Booting...\x1b[0m
---------------------------------
-🤖 Bot:        Starting
-🧠 Ollama:     Checking
-🌐 Dashboard:  http://localhost:3000
---------------------------------
-"
+# Move to script directory
+cd "$(dirname "$0")"
 
-# 1. Setup Environment Variables
-export OLLAMA_MAX_LOADED_MODELS=1
-export OLLAMA_NUM_PARALLEL=1
+echo "🤖 Bot:        Starting"
+cd bot
+npm start &
 
-# 2. Check and Pre-load Ollama
-if ! lsof -i:11434 > /dev/null; then
-    echo "⚙️ Starting Ollama daemon..."
-    ollama serve &
-    sleep 3
-fi
+cd ..
 
-# 3. Start Unified Server
-cd bot && /opt/homebrew/bin/node bot.js
+echo "🧠 Ollama:     Checking"
+ollama serve &>/dev/null &
+
+echo "🌐 Dashboard:  http://localhost:3000"
+echo "--------------------------------"
