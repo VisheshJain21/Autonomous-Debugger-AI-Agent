@@ -9,9 +9,9 @@ OpenClaw is a product-grade autonomous agentic workflow designed to identify, pa
 OpenClaw employs a **4-Stage ReAct Pipeline** powered by localized Ollama models:
 
 1.  **Planning (Llama 3)**: Analyzes code structure and predicts potential failure points.
-2.  **🔍 Debugging (Qwen 2.5 Coder)**: Generates localized patches and logic corrections.
-3.  **💻 Coding (DeepSeek Coder)**: Rebuilds the codebase with the proposed fixes.
-4.  **🧪 Testing (Qwen 2.5 Coder)**: Writes and executes `pytest` unit tests with strict coverage requirements.
+2.  ** Debugging (Qwen 2.5 Coder)**: Generates localized patches and logic corrections.
+3.  ** Coding (DeepSeek Coder)**: Rebuilds the codebase with the proposed fixes.
+4.  ** Testing (Qwen 2.5 Coder)**: Writes and executes `pytest` unit tests with strict coverage requirements.
 
 ## 🛠️ Key Features
 
