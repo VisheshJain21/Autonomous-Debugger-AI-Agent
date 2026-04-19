@@ -43,5 +43,3 @@ Message your Telegram bot:
 - `/status`: Monitor VRAM and GPU models.
 
 ---
-
-*Built with ❤️ by Antigravity for the next generation of autonomous engineering.*
