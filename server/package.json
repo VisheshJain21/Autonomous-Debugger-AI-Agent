@@ -1,0 +1,12 @@
+{
+  "name": "openclaw-engine",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "node-telegram-bot-api": "^0.67.0"
+  }
+}
